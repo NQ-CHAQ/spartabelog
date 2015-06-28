@@ -1,44 +1,78 @@
 <div class="col-md-8">
-<h1>レストラン詳細情報</h1>
+<h1><%=  @restaurant.name %>  <small><%= Point.find( @restaurant.avg_point ).star %>(<%= @restaurant.avg_point %>)</small></h1>
+<p><span class="glyphicon glyphicon-pencil">  <%= link_to '店舗情報を修正する', edit_restaurant_path( @restaurant ) %></span></p>
+<!-- タブメニューがある-->
+<ul class="nav nav-tabs nav-justified">
+  <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true">  Home</span></a></li>
+  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-road" aria-hidden="true">  店舗情報</span></a></li>
+  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true">アクセス</span></a></li>
+  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-heart-empty">  秘密</span></a></li>
+</ul>
+<img src="http://image1-4.tabelog.k-img.com/restaurant/images/Rvw/18190/640x640_rect_18190873.jpg" class="img-responsive thumbnail">
 
+<!-- テーブルで情報整理-->
 <p>店名：<%=  @restaurant.name %></p>
 <p>住所：<%=  @restaurant.address %></p>
 <p>tel:<%=  @restaurant.tel %></p>
 <p>url:<%=  @restaurant.url %></p>
 <p>ここに平均点が欲しい<%= @restaurant.avg_point %></p>
 <p><%= Point.find( @restaurant.avg_point ).star %></p>
-<%= link_to '編集', edit_restaurant_path( @restaurant ) %>
 
 <hr>
-<h2>レビューをかく</h2>
-<%= link_to 'レビューを書く', new_restaurant_review_path( @restaurant ) %>
+<%= link_to 'レビューを書く', new_restaurant_review_path( @restaurant ) ,class: "btn btn-danger btn-lg btn-block" %>
 
 <hr>
 
 <h2>レビューの一覧</h2>
-
-
 <% @restaurant.reviews.each do |review| %>
-<p><%= review.body %><br>
-<%= link_to '詳細', restaurant_review_path(@restaurant,review ) %>
-</p>
+<!-- ここからコメントの出力ループ-->
+  <div class="testimonials">
+    <div class="active item">
+      <blockquote><p><%= review.body %></p></blockquote>
+        <div class="carousel-info">
+        <img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" class="pull-left">
+        <div class="pull-left">
+        <span class="testimonials-name"><%= review.user.user_name %></span>
+        <span class="testimonials-post"><%= link_to 'レビュー詳細を見る', restaurant_review_path(@restaurant,review ) %></span>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
 </div>
 
 <div class="col-md-4">
-  <div class="thumbnail">
-  <p>イメージを乗せる</p>
-  <div class="caption">
-      <h3><%= current_user.user_name %></h3>
-    </div>
-  </div>
 
-  <div class="list-group">
-  <ul>
-  <li>リストが入ります。</li>
-  <li>リストが入ります。</li>
-  <li>リストが入ります。</li>
-  </ul>
-  </div>
+<!-- Shop登録-->
+<a href="restaurants/new" class="btn btn-danger btn-lg btn-block"><span class="glyphicon glyphicon-plus">新規ショップの登録</span></a><br/>
+
+<!-- Profile -->
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong><%= current_user.user_name %>さん</strong>
+</div>
+<div class="panel-body">
+<div class="col-md-5">
+<img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" class="img-responsive img-circle">
+</div>
+<div class="col-md-7">
+<p>住所：東京都<br/>
+趣味：すし<br/>
+コメント数：<span class="badge">14</span>
+</p>
+</div>
+</div><!-- /panel-body -->
+</div><!-- /panel panel-default -->
+
+
+    <div class="list-group">
+      <a href="#" class="list-group-item disabled">
+        Cras justo odio
+      </a>
+      <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+      <a href="#" class="list-group-item">Morbi leo risus</a>
+      <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+      <a href="#" class="list-group-item">Vestibulum at eros</a>
+    </div>
   </div>
 </div>
