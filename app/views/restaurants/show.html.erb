@@ -8,18 +8,37 @@
   <li role="presentation"><a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true">アクセス</span></a></li>
   <li role="presentation"><a href="#"><span class="glyphicon glyphicon-heart-empty">  秘密</span></a></li>
 </ul>
+<br/>
 <img src="http://image1-4.tabelog.k-img.com/restaurant/images/Rvw/18190/640x640_rect_18190873.jpg" class="img-responsive thumbnail">
 
 <!-- テーブルで情報整理-->
-<p>店名：<%=  @restaurant.name %></p>
-<p>住所：<%=  @restaurant.address %></p>
-<p>tel:<%=  @restaurant.tel %></p>
-<p>url:<%=  @restaurant.url %></p>
-<p>ここに平均点が欲しい<%= @restaurant.avg_point %></p>
-<p><%= Point.find( @restaurant.avg_point ).star %></p>
+<div class="table-responsive">
+  <table class="table table-bordered">
+  <caption>詳細情報</caption>
+    <tr >
+      <th class="active">店名：</th>
+      <td><%= @restaurant.name %></td>
+    </tr>
+    <tr>
+      <th class="active">住所：</th>
+      <td><%=  @restaurant.address %></td>
+    </tr>
+    <tr>
+      <th class="active">tel：</th>
+      <td><%= @restaurant.tel %></td>
+    </tr>
+    <tr>
+      <th class="active">url：</th>
+      <td><%=  @restaurant.url %></td>
+    </tr>
+  </table>
+</div>
+
+<!-- <p>ここに平均点が欲しい<%= @restaurant.avg_point %></p>
+<p><%= Point.find( @restaurant.avg_point ).star %></p>-->
 
 <hr>
-<%= link_to 'レビューを書く', new_restaurant_review_path( @restaurant ) ,class: "btn btn-danger btn-lg btn-block" %>
+<%= link_to 'レビューを書く', new_restaurant_review_path( @restaurant ) ,class: "btn btn-primary btn-lg btn-block" %>
 
 <hr>
 
@@ -37,7 +56,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div><br/>
 <% end %>
 </div>
 
@@ -49,7 +68,11 @@
 <!-- Profile -->
 <div class="panel panel-default">
 <div class="panel-heading">
-<strong><%= current_user.user_name %>さん</strong>
+<% if user_signed_in?  %>
+<strong><%=  current_user.user_name %>さん</strong>
+<% else %>
+<strong>名無しさん</strong>
+<% end %>
 </div>
 <div class="panel-body">
 <div class="col-md-5">
