@@ -1,0 +1,44 @@
+<div class="col-md-8">
+<h1>レストラン詳細情報</h1>
+
+<p>店名：<%=  @restaurant.name %></p>
+<p>住所：<%=  @restaurant.address %></p>
+<p>tel:<%=  @restaurant.tel %></p>
+<p>url:<%=  @restaurant.url %></p>
+<p>ここに平均点が欲しい<%= @restaurant.avg_point %></p>
+<p><%= Point.find( @restaurant.avg_point ).star %></p>
+<%= link_to '編集', edit_restaurant_path( @restaurant ) %>
+
+<hr>
+<h2>レビューをかく</h2>
+<%= link_to 'レビューを書く', new_restaurant_review_path( @restaurant ) %>
+
+<hr>
+
+<h2>レビューの一覧</h2>
+
+
+<% @restaurant.reviews.each do |review| %>
+<p><%= review.body %><br>
+<%= link_to '詳細', restaurant_review_path(@restaurant,review ) %>
+</p>
+<% end %>
+</div>
+
+<div class="col-md-4">
+  <div class="thumbnail">
+  <p>イメージを乗せる</p>
+  <div class="caption">
+      <h3><%= current_user.user_name %></h3>
+    </div>
+  </div>
+
+  <div class="list-group">
+  <ul>
+  <li>リストが入ります。</li>
+  <li>リストが入ります。</li>
+  <li>リストが入ります。</li>
+  </ul>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="col-md-8">
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>点数:</strong>
+  <%= @review.point %>
+</p>
+<p>
+  <strong>コメント:</strong>
+  <%= @review.body %>
+</p>
+
+<% if current_user.id ==  @review.user_id %>
+<%= link_to '編集', edit_restaurant_review_path( @review.restaurant_id,@review.id ) %> |
+<%= link_to '削除', restaurant_review_path( @review.restaurant_id,@review.id  ) ,method: :delete %> |
+<% end %>
+<%= link_to '戻る', restaurants_path %>
+</div>
+
+<div class="col-md-4">
+  <div class="thumbnail">
+  <p>イメージを乗せる</p>
+  <div class="caption">
+      <h3><%= current_user.user_name %></h3>
+    </div>
+  </div>
+
+  <div class="list-group">
+  <ul>
+  <li>リストが入ります。</li>
+  <li>リストが入ります。</li>
+  <li>リストが入ります。</li>
+  </ul>
+  </div>
+  </div>
+</div>
